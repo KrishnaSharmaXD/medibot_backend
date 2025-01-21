@@ -1,0 +1,6 @@
+langchain_community
+langchain_groq
+groq
+langchain==0.2
+flask
+gunicorn
