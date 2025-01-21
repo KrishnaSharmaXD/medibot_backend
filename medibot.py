@@ -27,7 +27,8 @@ llmWithTools=llm.bind_tools(tools)
 
 prompt= ChatPromptTemplate.from_messages(
     [
-        ("system","You are a medical based chatbot give a short and concise output about the disease, precautions, remedies and severity based on the disease symptoms user give"),
+       #("system","You are a medical based chatbot give a short and concise output about the disease, precautions, remedies and severity based on the disease symptoms user give"),
+        ("system","""You are expert at medical field try to solve user's queries related to health if the user asks questions outside of your domain just reply that you are a medical chatbot designed to assist you in health related issues please ask questions related to health"""),
         MessagesPlaceholder(variable_name="chat_history"),
         ("human","{input}"),
         MessagesPlaceholder(variable_name="agent_scratchpad")
@@ -51,7 +52,7 @@ def calling(lst):
     if len(lst) == 1:
            response=agentex.invoke({"input":lst[0], "chat_history":chat_history.messages})
            return response['output']        
-    else:
+    else: 
         for  i in range(0,len(lst)-1):
             if i % 2 == 0:
                   chat_history.add_user_message(lst[i])
@@ -60,6 +61,6 @@ def calling(lst):
         response=agentex.invoke({"input":lst[len(lst)-1], "chat_history":chat_history.messages})
         return response['output']     
 
-# response=agentex.invoke({"input":"Im having a sprain in my anknle how to fix it", "chat_history":chat_history.messages})
+# response=agentex.invoke({"input":"im having sudden pain in my heart", "chat_history":chat_history.messages})
 
 # print(response['output'])

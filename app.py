@@ -24,6 +24,7 @@ CORS(app)
 def hello():
     return "Hello world"
 
+
 @app.route('/chat', methods=['POST'])
 def chat():
     try:
@@ -36,7 +37,7 @@ def chat():
         
 
         # Send a response
-        return jsonify({'message':medibot.calling(received_list)}), 200
+        return jsonify({'message':str(medibot.calling(received_list))}), 200
     except Exception as e:
         return jsonify({'message': str(e), 'status': 'error'}), 400
 
