@@ -3,4 +3,5 @@ langchain_groq
 groq
 langchain==0.2
 flask
+Flask-Cors
 gunicorn

@@ -20,6 +20,10 @@ CORS(app)
 #     # else:
 #     #     return jsonify({'error': 'No college name provided'}), 400
 
+@app.route('/')
+def hello():
+    return "Hello world"
+
 @app.route('/chat/<query>')
 def chat(query):
     
