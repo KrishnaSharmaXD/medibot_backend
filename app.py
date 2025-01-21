@@ -26,7 +26,6 @@ def hello():
 
 @app.route('/chat/<query>')
 def chat(query):
-    
     return jsonify({'query':medibot.calling(query)})
     # # Here you would use the initialized RAG chain to process the query
     # # This is a placeholder for actual RAG logic
