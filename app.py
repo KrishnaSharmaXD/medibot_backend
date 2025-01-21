@@ -24,9 +24,27 @@ CORS(app)
 def hello():
     return "Hello world"
 
-@app.route('/chat/<query>')
-def chat(query):
-    return jsonify({'query':medibot.calling(query)})
+@app.route('/chat/')
+def chat():
+    try:
+        # Get JSON data
+        data = request.get_json()
+        print(f"Received data: {data}")
+
+        # Example: Access specific fields
+        received_list = data.get('data')
+        
+        # Log the list
+        print(f"Received List: {received_list}")
+        
+
+        # Send a response
+        return jsonify({'query':medibot.calling(received_list)}), 200
+    except Exception as e:
+        return jsonify({'message': str(e), 'status': 'error'}), 400
+
+
+    
     # # Here you would use the initialized RAG chain to process the query
     # # This is a placeholder for actual RAG logic
     # if college and query:
