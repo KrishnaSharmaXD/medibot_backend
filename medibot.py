@@ -14,7 +14,7 @@ search= DuckDuckGoSearchRun()
 def duckWrapper(inputText):
     """useful for when you want to answer medical or pharmalogical problems"""
     searchResult=search.run(f"site:who.int {inputText}")
-    return searchResult
+    return f"Search results: {searchResult}"
 tools=[
     Tool(
         name="Web Search",
@@ -28,7 +28,8 @@ llmWithTools=llm.bind_tools(tools)
 prompt= ChatPromptTemplate.from_messages(
     [
        #("system","You are a medical based chatbot give a short and concise output about the disease, precautions, remedies and severity based on the disease symptoms user give"),
-        ("system","""You are expert at medical field try to solve user's queries related to health if the user asks questions outside of your domain just reply that you are a medical chatbot designed to assist you in health related issues please ask questions related to health"""),
+        ("system","""You are a helpful medical symptom checker. Solve health-related queries and ask for symptoms using tools where needed.
+Always provide clear, concise final answers without showing the tool invocation format. Dont exceed 200 words"""),
         MessagesPlaceholder(variable_name="chat_history"),
         ("human","{input}"),
         MessagesPlaceholder(variable_name="agent_scratchpad")
@@ -61,6 +62,6 @@ def calling(lst):
         response=agentex.invoke({"input":lst[len(lst)-1], "chat_history":chat_history.messages})
         return response['output']     
 
-# response=agentex.invoke({"input":"im having sudden pain in my heart", "chat_history":chat_history.messages})
+# response=agentex.invoke({"input":"Im feeling headache and dizziness", "chat_history":chat_history.messages})
 
-# print(response['output'])
+# print(response["output"])
