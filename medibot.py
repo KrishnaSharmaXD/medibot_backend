@@ -13,7 +13,7 @@ search= DuckDuckGoSearchRun()
 
 def duckWrapper(inputText):
     """useful for when you want to answer medical or pharmalogical problems"""
-    searchResult=search.run(f"site:webmd.com {inputText}")
+    searchResult=search.run(f"site:who.int {inputText}")
     return searchResult
 tools=[
     Tool(
