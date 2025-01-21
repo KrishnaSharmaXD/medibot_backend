@@ -24,14 +24,11 @@ CORS(app)
 def hello():
     return "Hello world"
 
-@app.route('/chat/')
+@app.route('/chat', methods=['POST'])
 def chat():
     try:
         # Get JSON data
         data = request.get_json()
-        print(f"Received data: {data}")
-
-        # Example: Access specific fields
         received_list = data.get('data')
         
         # Log the list
@@ -39,20 +36,44 @@ def chat():
         
 
         # Send a response
-        return jsonify({'query':medibot.calling(received_list)}), 200
+        return jsonify({'message':medibot.calling(received_list)}), 200
     except Exception as e:
         return jsonify({'message': str(e), 'status': 'error'}), 400
 
 
-    
-    # # Here you would use the initialized RAG chain to process the query
-    # # This is a placeholder for actual RAG logic
-    # if college and query:
-    #     response = generate_response(chain, query)
-    #     print(f'You asked about {college}: {query}')
-    #     return jsonify({'response': response}), 200
-    # else:
-    #     return jsonify({'error': 'Invalid request'}), 400
-
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+
+# @app.route('/chat', methods=['POST'])
+# def chat():
+#     try:
+#         # Get JSON data
+#         data = request.get_json()
+#         received_list = data.get('data')
+        
+#         # Log the list
+#         print(f"Received List: {received_list}")
+        
+
+#         # Send a response
+#         return jsonify({'query':medibot.calling(received_list)}), 200
+#     except Exception as e:
+#         return jsonify({'message': str(e), 'status': 'error'}), 400
+
+
+    
+#     # # Here you would use the initialized RAG chain to process the query
+#     # # This is a placeholder for actual RAG logic
+#     # if college and query:
+#     #     response = generate_response(chain, query)
+#     #     print(f'You asked about {college}: {query}')
+#     #     return jsonify({'response': response}), 200
+#     # else:
+#     #     return jsonify({'error': 'Invalid request'}), 400
+
+# if __name__ == '__main__':
+#     app.run(debug=True)
