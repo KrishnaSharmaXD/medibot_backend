@@ -2,6 +2,7 @@ langchain_community
 langchain_groq
 groq
 langchain==0.2
+duckduckgo-search
 flask
 Flask-Cors
 gunicorn
