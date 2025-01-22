@@ -28,7 +28,7 @@ def hello():
 @app.route('/chat', methods=['POST'])
 def chat():
     try:
-        # Get JSON data
+        # Get JSON data 
         data = request.get_json()
         received_list = data.get('data')
         
