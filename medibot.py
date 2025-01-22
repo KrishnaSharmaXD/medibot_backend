@@ -15,11 +15,21 @@ def duckWrapper(inputText):
     """useful for when you want to answer medical or pharmalogical problems"""
     searchResult=search.run(f"site:who.int {inputText}")
     return f"Search results: {searchResult}"
+
+def duckWrapperLoc(inputText):
+    """useful when you weant to search for best clinics near a location"""
+    searchResult=search.run(f"{inputText}")
+    return f"Search results: {searchResult}"
 tools=[
     Tool(
-        name="Web Search",
+        name="Web SearchMD",
         func=duckWrapper,
         description= "useful for when you want to answer medical or pharmalogical problems"
+    ),
+    Tool(
+        name="Web Search",
+        func=duckWrapperLoc,
+        description= "useful when you weant to search for best clinics near a location"
     )
 ]
 
@@ -28,7 +38,7 @@ llmWithTools=llm.bind_tools(tools)
 prompt= ChatPromptTemplate.from_messages(
     [
        
-("system","""You are a helpful medical symptom checker. Solve health-related queries and ask for symptoms using tools where needed.Analyse all the sysmptoms given to come to a decision/conclusion,Also give hints for symstoms.Always provide clear, concise final answers without showing the tool invocation format. Dont exceed 300 words.Only answer to medical related queries.Don't say consult a doctor until you have reached a conclusion from the symptoms.Ask for symptoms by giving the list of symptoms you want to know about."""),
+("system","""You are a helpful medical symptom checker. Solve health-related queries and ask for symptoms using tools where needed.Analyse all the sysmptoms given to come to a decision/conclusion,Also give hints for symstoms.Always provide clear, concise final answers without showing the tool invocation format. Dont exceed 250 words.Only answer to medical related queries.Don't say consult a doctor until you have reached a conclusion from the symptoms.Ask for symptoms by giving the list of symptoms you want to know about."""),
         MessagesPlaceholder(variable_name="chat_history"),
         ("human","{input}"),
         MessagesPlaceholder(variable_name="agent_scratchpad")
