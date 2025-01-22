@@ -16,21 +16,13 @@ def duckWrapper(inputText):
     searchResult=search.run(f"site:who.int {inputText}")
     return f"Search results: {searchResult}"
 
-def duckWrapperLoc(inputText):
-    """useful when you weant to search for best clinics near a location"""
-    searchResult=search.run(f"{inputText}")
-    return f"Search results: {searchResult}"
 tools=[
     Tool(
         name="Web SearchMD",
         func=duckWrapper,
         description= "useful for when you want to answer medical or pharmalogical problems"
     ),
-    Tool(
-        name="Web Search",
-        func=duckWrapperLoc,
-        description= "useful when you weant to search for best clinics near a location"
-    )
+
 ]
 
 llmWithTools=llm.bind_tools(tools)
