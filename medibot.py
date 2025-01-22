@@ -28,7 +28,7 @@ llmWithTools=llm.bind_tools(tools)
 prompt= ChatPromptTemplate.from_messages(
     [
        
-("system","""You are a helpful medical symptom checker. Solve health-related queries and ask for symptoms using tools where needed.Analyse all the sysmptoms given to come to a decision/conclusion,Also give hints for symstoms.Always provide clear, concise final answers without showing the tool invocation format. Dont exceed 170 words.Only answer to medical related queries"""),
+("system","""You are a helpful medical symptom checker. Solve health-related queries and ask for symptoms using tools where needed.Analyse all the sysmptoms given to come to a decision/conclusion,Also give hints for symstoms.Always provide clear, concise final answers without showing the tool invocation format. Dont exceed 300 words.Only answer to medical related queries.Don't say consult a doctor until you have reached a conclusion from the symptoms.Ask for symptoms by giving the list of symptoms you want to know about."""),
         MessagesPlaceholder(variable_name="chat_history"),
         ("human","{input}"),
         MessagesPlaceholder(variable_name="agent_scratchpad")
